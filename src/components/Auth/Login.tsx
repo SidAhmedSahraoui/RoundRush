@@ -1,49 +1,69 @@
 import React, { useEffect } from "react";
 import Helmet from "react-helmet";
-
+import Pic from "../../img/Frame.png";
 import useStyles from "./style";
+import Typography from "@mui/material/Typography";
+import Grid from "@mui/material/Grid";
+import TextField from "@mui/material/TextField";
 
+// app layout
+import { CardBox } from "../Layouts/CardBox/CardBox";
+import { changeEmail, changePassword } from "../../Redux/auth/auth-slice";
+import { useAppDispatch, useAppSelector } from "../../Redux/hooks";
 
 const Login: React.FC = () => {
+  const classes = useStyles();
+  const dispatch = useAppDispatch();
+  const { id, email, password, isValid, isLoading, errorMessage } =
+    useAppSelector((state) => state.auth);
+  const handleChangeEmail = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const value = event.target.value;
 
-    const classes = useStyles();
+    dispatch(changeEmail(value));
+  };
+  const handleChangePassword = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const value = event.target.value;
 
-  useEffect(() => {
-  }, []);
+    dispatch(changePassword(value));
+  };
+  useEffect(() => {}, []);
 
   return (
     <>
-    <Helmet>
-        Login
-    </Helmet>
+      <Helmet>Login</Helmet>
 
       <div className={classes.root}>
-        <h3 className="title">Sign in</h3>
-        <h6 className="subtitle">Start helping or getting help.</h6>
+        <img src={Pic} alt="Roundrush" />
+        <h2>THE OPTIMIZED WORKFLOW OUT OF THE BOX</h2>
 
-        <form className="mt-4" >
-          <div className="form-group">
-            <input
-              className="input-text"
-              type="text"
-              name="username"
-              placeholder="Username"
-              required
+        <CardBox>
+          <Typography className="title" variant="h5" mb={3}>
+            Login
+          </Typography>
+          {/* Quiz Title */}
+          <Grid item xs={12} mb={3}>
+            <TextField
+              value={email}
+              onChange={handleChangeEmail}
+              label="Email"
+              variant="outlined"
+              size="medium"
+              fullWidth
+              inputProps={{ "data-testid": "email" }}
             />
-          </div>
-
-          <div className="form-group">
-            <input
-              className="input-text"
-              type="password"
-              name="password"
-              placeholder="Password"
-              required
+          </Grid>
+          <Grid item xs={12} mb={3}>
+            <TextField
+              value={password}
+              onChange={handleChangePassword}
+              label="Password"
+              variant="outlined"
+              size="medium"
+              fullWidth
+              inputProps={{ "data-testid": "password" }}
             />
-          </div>
-
-          
-        </form>
+          </Grid>
+        </CardBox>
       </div>
     </>
   );

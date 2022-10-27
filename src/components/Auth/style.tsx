@@ -1,33 +1,44 @@
-import { createUseStyles } from 'react-jss';
-import colors from '../Styles/colors';
-import { CARD_SHADOW, BUTTON_PRIMARY, INPUT_TEXT } from '../Styles/styling';
+import { createUseStyles } from "react-jss";
+import colors from "../Styles/colors";
 
 const useStyles = createUseStyles({
   root: {
     background: `linear-gradient(180deg, ${colors.secondary} 0%, ${colors.primary} 100%)`,
-    padding: '0px',
-    margin: '0px',
+    padding: "0px",
+    margin: "0px",
     width: "100%",
     height: "100vh",
-    '&.card-shadow': CARD_SHADOW,
-    '& .title': {
-        margin: "0px",
-      color: colors['text-gray-100'],
+    "& img": {
+      marginTop: "62px",
     },
-    '& .subtitle': {
-      color: colors['text-gray-700'],
-      fontWeight: '400',
+    "& h2": {
+      margin: "auto",
+      width: "300px",
+      height: "48px",
+      marginTop: "24px",
+      fontFamily: "Inter",
+      fontSize: "12px",
+      fontWeight: 500,
+      lineHeight: "24px",
+      letterSpacing: "6px",
+      textAlign: "center",
+      textTransform: "uppercase",
+      color: "#4C84FF",
     },
-    '& .button-primary': BUTTON_PRIMARY,
-    '& .input-text': INPUT_TEXT,
-    '& .form-link': {
-      '& a': {
-        color: colors['text-gray-700'],
-        '& span': {
-          fontWeight: 500,
-        },
-      },
-    },
+    "& .title": {
+      height: "20px",
+width: "57px",
+fontFamily: "Rubik",
+fontSize: "22px",
+fontWeight: 400,
+lineHeight: "20px",
+letterSpacing: "0px",
+margin: "auto",
+
+
+
+
+    }
   },
 });
 
