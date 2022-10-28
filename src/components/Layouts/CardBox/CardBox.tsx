@@ -8,7 +8,6 @@ const useStyles = makeStyles(() =>
   createStyles({
     root: {
       textAlign: "center",
-      height: "389px",
       width: "539px",
       left: "0px",
       top: "0px",

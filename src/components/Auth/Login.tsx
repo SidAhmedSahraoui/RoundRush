@@ -2,8 +2,9 @@ import React, { useEffect } from "react";
 import Helmet from "react-helmet";
 import Pic from "../../img/Frame.png";
 import useStyles from "./style";
-import {Input, Grid, Typography, Button} from "@mui/material";
-import { changeEmail, changePassword } from "../../Redux/auth/auth-slice";
+import {Input, Grid, Typography, Button, Alert} from "@mui/material";
+import { changeEmail, changePassword, loginUser } from "../../Redux/auth/auth-slice";
+import { resetState } from "../../Redux/auth/register-slice";
 import { useAppDispatch, useAppSelector } from "../../Redux/hooks";
 import colors from "../Styles/colors";
 import { Link } from "react-router-dom";
@@ -14,7 +15,7 @@ import { CardBox } from "../Layouts/CardBox/CardBox";
 const Login: React.FC = () => {
   const classes = useStyles();
   const dispatch = useAppDispatch();
-  const { id, email, password, isValid, isLoading, errorMessage } =
+  const {  email, password, errorMessage } =
     useAppSelector((state) => state.auth);
   const handleChangeEmail = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
@@ -40,8 +41,14 @@ const Login: React.FC = () => {
           <Typography sx={{margin: "12px !important", textAlign: "center"}} className="title" variant="h5" mb={3}>
             Login
           </Typography>
-          {/* Quiz Title */}
-          <Grid className="form">
+          {errorMessage && (
+          <Grid className="alert-grid" item xs={12} mb={4}>
+            <Alert className="alert" variant="filled" severity="warning">
+              {errorMessage}
+            </Alert>
+          </Grid>
+        )}
+          <form className="form">
           <Grid item xs={12} mb={3}>
             <Input
               type="Email"
@@ -86,6 +93,7 @@ const Login: React.FC = () => {
             <Button
               variant="contained"
               disableElevation
+              onClick={() => dispatch(loginUser())}
               sx={{
                 boxShadow: "none",
                 textTransform: "none",
@@ -101,14 +109,14 @@ const Login: React.FC = () => {
             </Button>
           </Grid>
           <Grid className="links">
-            <Link className="link" to="">
+            <Link className="link" to="/forget">
               <span>I forget my password</span>
             </Link>
-            <Link className="link" to="">
+            <Link onClick={() => resetState()} className="link" to="/register">
               <span>I don't have an account</span>
             </Link>
           </Grid>
-          </Grid>
+          </form>
         </CardBox>
       </div>
     </>

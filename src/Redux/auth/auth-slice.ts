@@ -1,11 +1,11 @@
-import axios, { AxiosError, AxiosResponse } from "axios";
+//import axios, { AxiosError, AxiosResponse } from "axios";
 import { createSlice, PayloadAction, current } from "@reduxjs/toolkit";
 import { v4 as uuidv4 } from "uuid";
 import { AppThunk, RootState } from "../store";
 import { User } from "../../types/types";
 
 const initialState: User = {
-  id: uuidv4(),
+  id: "",
   email: "",
   password: "",
   isLoading: false,
@@ -13,8 +13,8 @@ const initialState: User = {
   isValid: false,
 };
 
-export const createUserSlice = createSlice({
-  name: "create-user",
+export const loginUserSlice = createSlice({
+  name: "login-user",
   initialState,
   reducers: {
     resetState: () => initialState,
@@ -50,6 +50,7 @@ export const createUserSlice = createSlice({
       state.isLoading = true;
     },
     createUserSuccess: (state, action: PayloadAction<string>) => {
+      state.id = action.payload;
       state.errorMessage = "";
       state.isLoading = false;
     },
@@ -68,14 +69,14 @@ export const {
   setLoading,
   createUserSuccess,
   createUserFail,
-} = createUserSlice.actions;
+} = loginUserSlice.actions;
 
 export const selectCreateUser = (state: RootState) => state.auth;
 
-export const createQuiz = (): AppThunk => async (dispatch, getState) => {
+export const loginUser = (): AppThunk => async (dispatch, getState) => {
   dispatch(validateForm());
 
-  const { id, email, password, isValid } = selectCreateUser(
+  const {  email, password, isValid } = selectCreateUser(
     getState()
   );
 
@@ -83,9 +84,14 @@ export const createQuiz = (): AppThunk => async (dispatch, getState) => {
   if (isValid) {
     dispatch(setLoading());
 
-    try {
+    if(email === "admin@admin.com" || password === "123456"){
+      dispatch(createUserSuccess(uuidv4()));
+
+    } else {
+      dispatch(createUserFail("Please make sure you have the correct email and password"))
+    }
+    /*try {
       const res: AxiosResponse = await axios.post("quizzes", {
-        id,
         email,
         password,
       });
@@ -98,8 +104,8 @@ export const createQuiz = (): AppThunk => async (dispatch, getState) => {
       const errorMessage = response?.data || "Something unexpected happend!";
 
       dispatch(createUserFail(JSON.stringify(errorMessage)));
-    }
+    }*/
   }
 };
 
-export default createUserSlice.reducer;
+export default loginUserSlice.reducer;
