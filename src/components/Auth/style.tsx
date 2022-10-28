@@ -27,18 +27,35 @@ const useStyles = createUseStyles({
     },
     "& .title": {
       height: "20px",
-width: "57px",
-fontFamily: "Rubik",
-fontSize: "22px",
-fontWeight: 400,
-lineHeight: "20px",
-letterSpacing: "0px",
-margin: "auto",
-
-
-
-
-    }
+      width: "57px",
+      fontFamily: "Rubik",
+      fontSize: "22px",
+      fontWeight: 400,
+      lineHeight: "20px",
+      letterSpacing: "0px",
+      margin: "47px auto !important"
+    },
+    "& .form": {
+      alignItems: "center",
+      display: "flex",
+      justifyContent: "space-evenly",
+      flexDirection: "column",
+      "& .links": {
+        width: "344px",
+        display: "flex",
+        justifyContent: "space-between",
+        marginTop: "18px",
+        "& .link": {
+          textDecoration: "none",
+          "& span": {
+            color: colors.blue,
+            fontSize: "14px",
+            fontWeight: 400,
+            fontFamily: "Rubik"
+          }
+        }
+      }
+    },
   },
 });
 

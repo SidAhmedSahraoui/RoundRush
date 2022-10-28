@@ -16,7 +16,7 @@ const useStyles = makeStyles(() =>
       margin: "auto",
       background: "rgba(255, 255, 255, 1)",
       boxShadow: "0px 2px 10px 0px rgba(0, 0, 0, 0.1) !important",
-      marginTop: "48px"
+      marginTop: "48px",
     }
   }),
 );
