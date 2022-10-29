@@ -1,6 +1,7 @@
 import React from "react";
 import Helmet from "react-helmet";
 import Pic from "../../img/Frame.png";
+import Mail from "../../img/Mail.svg";
 import useStyles from "./style";
 import { Link } from "react-router-dom";
 import {
@@ -31,10 +32,10 @@ import {
   validateEmail,
   validateForm,
   registerUser,
-} from "../../Redux/auth/register-slice";
-import { resetState } from "../../Redux/auth/auth-slice";
+  resetState,
+} from "../../redux/auth/register-slice";
 
-import { useAppDispatch, useAppSelector } from "../../Redux/hooks";
+import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import colors from "../Styles/colors";
 
 // app layout
@@ -49,6 +50,7 @@ const Register: React.FC = () => {
     password,
     company,
     space,
+    accept,
     industry,
     employees,
     isValid,
@@ -101,7 +103,7 @@ const Register: React.FC = () => {
     },
     "& .MuiInputBase-input": {
       width: "300px",
-      height: "40px",
+      height: "40px !important",
       borderRadius: "4px",
       backgroundColor: "#fcfcfb",
       border: `2px solid ${colors.gray}`,
@@ -130,332 +132,358 @@ const Register: React.FC = () => {
         <img src={Pic} alt="Roundrush" />
         <h2>SIGN UP A NEW USER</h2>
 
-        {!isExist && !isValid && !formValid ? (
-          <CardBox>
-            <Typography className="title reg-title" variant="h4" mb={3}>
-              Sign Up
-            </Typography>
-            <Typography
-              sx={{ margin: "12px !important", textAlign: "center" }}
-              className="sub-title"
-              variant="h6"
-              mb={3}>
-              Let's validate your email first
-            </Typography>
+        {!accept ? (
+          !isExist && !isValid && !formValid ? (
+            <CardBox>
+              <Typography className="title reg-title" variant="h4" mb={3}>
+                Sign Up
+              </Typography>
+              <Typography
+                sx={{ margin: "12px !important", textAlign: "center" }}
+                className="sub-title"
+                variant="h6"
+                mb={3}>
+                Let's validate your email first
+              </Typography>
 
-            <form className="form">
-              <Grid item xs={12} mb={3}>
-                <Input
-                  type="email"
-                  value={email}
-                  onChange={handleChangeEmail}
-                  disableUnderline
-                  placeholder="Insert your email"
-                  sx={{
-                    borderRadius: "4px",
-                    backgroundColor: "#fcfcfb",
-                    border: `2px solid ${colors.gray}`,
-                    fontSize: "14px",
-                    fontWeight: 400,
-                    width: "344px",
-                    height: "40px",
-                    padding: "10px 8px",
-                  }}
-                />
-              </Grid>
-            </form>
-            <Grid>
-              <Button
-                variant="contained"
-                disableElevation
-                onClick={() => dispatch(validateEmail())}
-                sx={{
-                  boxShadow: "none",
-                  textTransform: "none",
-                  fontSize: 16,
-                  padding: "6px 12px",
-                  border: "1px solid",
-                  lineHeight: 1.5,
-                  backgroundColor: "#0063cc",
-                  borderColor: "#0063cc",
-                  width: "344px",
-                  marginBottom: "24px",
-                }}>
-                Next
-              </Button>
-            </Grid>
-          </CardBox>
-        ) : !isValid && !formValid && isExist ? (
-          <CardBox>
-            <Typography className="title reg-title" variant="h4" mb={3}>
-              Sign Up
-            </Typography>
-            <Typography
-              sx={{ margin: "12px !important", textAlign: "center" }}
-              className="sub-title"
-              variant="h6"
-              mb={3}>
-              Your email is already acount in Roundrush
-            </Typography>
-
-            <Grid>
-              <Link style={{ textDecoration: "none" }} to="/">
+              <form className="form">
+                <Grid item xs={12} mb={3}>
+                  <Input
+                    type="email"
+                    value={email}
+                    onChange={handleChangeEmail}
+                    disableUnderline
+                    placeholder="Insert your email"
+                    sx={{
+                      borderRadius: "4px",
+                      backgroundColor: "#fcfcfb",
+                      border: `2px solid ${colors.gray}`,
+                      fontSize: "14px",
+                      fontWeight: 400,
+                      width: "344px",
+                      height: "40px",
+                      padding: "10px 8px",
+                    }}
+                  />
+                </Grid>
+              </form>
+              <Grid>
                 <Button
                   variant="contained"
+                  color="success"
                   disableElevation
                   sx={{
                     boxShadow: "none",
                     textTransform: "none",
+                    backgroundColor: "#4C84FF",
                     fontSize: 16,
-                    padding: "6px 12px",
+                    padding: "14px auto",
                     border: "1px solid",
                     lineHeight: 1.5,
-                    backgroundColor: "#0063cc",
-                    borderColor: "#0063cc",
+                    borderColor: "#4C84FF",
                     width: "344px",
                     marginBottom: "24px",
+                    "&:hover": {
+                      backgroundColor: "#4C84FF",
+                      borderColor: "#4C84FF",
+                      boxShadow: "none",
+                    },
                   }}
-                  onClick={() => resetState()}>
-                  Click here to authenticate
-                </Button>
-              </Link>
-            </Grid>
-          </CardBox>
-        ) : isValid && !formValid && isExist ? (
-          <CardBox>
-            <Typography className="title reg-title" variant="h4" mb={3}>
-              Sign Up
-            </Typography>
-            <Typography
-              sx={{ margin: "12px !important", textAlign: "center" }}
-              className="sub-title"
-              variant="h6"
-              mb={3}>
-              Fill up your account information
-            </Typography>
-
-            <form className="form">
-              <Grid item xs={12} mb={3}>
-                <Input
-                  type="text"
-                  value={name}
-                  onChange={handleChangeName}
-                  disableUnderline
-                  placeholder="Insert your full name"
-                  sx={{
-                    borderRadius: "4px",
-                    backgroundColor: "#fcfcfb",
-                    border: `2px solid ${colors.gray}`,
-                    fontSize: "14px",
-                    fontWeight: 400,
-                    width: "344px",
-                    height: "40px",
-                    padding: "10px 8px",
-                  }}
-                />
-              </Grid>
-              <Grid item xs={12} mb={3}>
-                <Input
-                  type="password"
-                  value={password}
-                  onChange={handlechangePassword}
-                  disableUnderline
-                  placeholder="Choose your password"
-                  sx={{
-                    borderRadius: "4px",
-                    backgroundColor: "#fcfcfb",
-                    border: `2px solid ${colors.gray}`,
-                    fontSize: "14px",
-                    fontWeight: 400,
-                    width: "344px",
-                    height: "40px",
-                    padding: "10px 8px",
-                  }}
-                />
-              </Grid>
-            </form>
-
-            <Grid>
-              <Link style={{ textDecoration: "none" }} to="/">
-                <Button
-                  variant="contained"
-                  disableElevation
-                  sx={{
-                    boxShadow: "none",
-                    textTransform: "none",
-                    fontSize: 16,
-                    padding: "6px 12px",
-                    border: "1px solid",
-                    lineHeight: 1.5,
-                    backgroundColor: "#0063cc",
-                    borderColor: "#0063cc",
-                    width: "344px",
-                    marginBottom: "24px",
-                  }}
-                  onClick={() => validateForm()}>
+                  onClick={() => dispatch(validateEmail())}>
                   Next
                 </Button>
-              </Link>
-            </Grid>
-          </CardBox>
-        ) : (
-          <CardBox>
-            <Typography className="title reg-title" variant="h4" mb={3}>
-              Sign Up
-            </Typography>
-            <Typography
-              sx={{ margin: "12px !important", textAlign: "center" }}
-              className="sub-title"
-              variant="h6"
-              mb={3}>
-              Create your company space
-            </Typography>
-
-            <form className="form">
-              <Grid item xs={12} mb={3}>
-                <InputLabel
-                  sx={{
-                    textAlign: "start",
-                    fontSize: "12px",
-                    fontWeight: 400,
-                    fontFamilly: "Rubik",
-                    color: "#ADB0B8",
-                    paddingBottom: "8px !important",
-                    paddingLeft: "8px",
-                  }}>
-                  {" "}
-                  Company Name
-                </InputLabel>
-                <Input
-                  type="text"
-                  value={company}
-                  onChange={handlechangeCompany}
-                  disableUnderline
-                  placeholder="Company name"
-                  sx={{
-                    borderRadius: "4px",
-                    backgroundColor: "#fcfcfb",
-                    border: `2px solid ${colors.gray}`,
-                    fontSize: "14px",
-                    fontWeight: 400,
-                    width: "344px",
-                    height: "40px",
-                    padding: "10px 8px",
-                  }}
-                />
               </Grid>
-              <Grid item xs={12} mb={3}>
-                <InputLabel
-                  sx={{
-                    textAlign: "start",
-                    fontSize: "12px",
-                    fontWeight: 400,
-                    fontFamilly: "Rubik",
-                    color: "#ADB0B8",
-                    paddingBottom: "8px !important",
-                    paddingLeft: "8px",
-                  }}>
-                  {" "}
-                  Your space will be
-                </InputLabel>
-                <Input
-                  type="text"
-                  value={space}
-                  onChange={handlechangeSpace}
-                  disableUnderline
-                  placeholder="Your space"
-                  sx={{
-                    borderRadius: "4px",
-                    backgroundColor: "#fcfcfb",
-                    border: `2px solid ${
-                      errorMessage ? "#FD5461" : colors.gray
-                    }`,
-                    fontSize: "14px",
-                    fontWeight: 400,
-                    width: "344px",
-                    height: "40px",
-                    padding: "10px 8px",
-                  }}
-                />
-                <FormHelperText className="verif-alert">
-                  {errorMessage ? (
-                    <p>
-                      {" "}
-                      <Icon
-                        sx={{
-                          width: "12px",
-                          height: "12px",
-                        }}
-                        style={{ color: "#FD5461" }}
-                        component={ErrorOutlineIcon}></Icon>{" "}
-                      {errorMessage}
-                    </p>
-                  ) : null}
-                </FormHelperText>
-              </Grid>
-              <FormControl>
-                <FormHelperText
-                  sx={{
-                    textAlign: "start",
-                    fontSize: "12px",
-                    fontWeight: 400,
-                    fontFamilly: "Rubik",
-                    color: "#ADB0B8",
-                    paddingBottom: "8px !important",
-                    paddingLeft: "8px",
-                    margin: "0px",
-                  }}>
-                  Industry
-                </FormHelperText>
-                <Select
-                  value={industry}
-                  IconComponent={KeyboardArrowDownIcon}
-                  onChange={handlechangeIndustry}
-                  input={<CustomInput />}>
-                  <MenuItem value="Computer">Computer</MenuItem>
-                  <MenuItem value="Medical">Medical</MenuItem>
-                  <MenuItem value="Pharmacy">Pharmacy</MenuItem>
-                </Select>
-              </FormControl>
-              <FormControl>
-                <FormHelperText
-                  sx={{
-                    textAlign: "start",
-                    fontSize: "12px",
-                    fontWeight: 400,
-                    fontFamilly: "Rubik",
-                    color: "#ADB0B8",
-                    paddingBottom: "8px !important",
-                    paddingLeft: "8px",
-                    margin: "0",
-                  }}>
-                  Number of employees
-                </FormHelperText>
-                <Select
-                  value={employees}
-                  IconComponent={KeyboardArrowDownIcon}
-                  displayEmpty
-                  inputProps={{ "aria-label": "Without label" }}
-                  onChange={handlechangeEmployees}
-                  defaultValue="1"
-                  input={<CustomInput />}>
-                  <MenuItem value="1">20 </MenuItem>
-                  <MenuItem value="2">30</MenuItem>
-                  <MenuItem value="3">40</MenuItem>
-                </Select>
-              </FormControl>
-              <FormControl className="check">
-              <Checkbox defaultChecked />
-              <FormHelperText
-                sx={{ color: "##5A6171", fontSize: "12px", fontWeight: 400 }}>
-                Accept all condition and privacy politic
-              </FormHelperText>
-              </FormControl>
-      
-            </form>
+            </CardBox>
+          ) : !isValid && !formValid && isExist ? (
+            <CardBox>
+              <Typography className="title reg-title" variant="h4" mb={3}>
+                Sign Up
+              </Typography>
+              <Typography
+                sx={{ margin: "12px !important", textAlign: "center" }}
+                className="sub-title"
+                variant="h6"
+                mb={3}>
+                Your email is already acount in Roundrush
+              </Typography>
 
-            <Grid>
-              <Link style={{ textDecoration: "none" }} to="/">
+              <Grid>
+                <Link style={{ textDecoration: "none" }} to="/">
+                  <Button
+                    variant="contained"
+                    color="success"
+                    disableElevation
+                    sx={{
+                      boxShadow: "none",
+                      textTransform: "none",
+                      backgroundColor: "#4C84FF",
+                      fontSize: 16,
+                      padding: "14px auto",
+                      border: "1px solid",
+                      lineHeight: 1.5,
+                      borderColor: "#4C84FF",
+                      width: "344px",
+                      marginBottom: "24px",
+                      "&:hover": {
+                        backgroundColor: "#4C84FF",
+                        borderColor: "#4C84FF",
+                        boxShadow: "none",
+                      },
+                    }}
+                    onClick={() => dispatch(resetState())}>
+                    Click here to authenticate
+                  </Button>
+                </Link>
+              </Grid>
+            </CardBox>
+          ) : isValid && !formValid && !isExist ? (
+            <CardBox>
+              <Typography className="title reg-title" variant="h4" mb={3}>
+                Sign Up
+              </Typography>
+              <Typography
+                sx={{ margin: "12px !important", textAlign: "center" }}
+                className="sub-title"
+                variant="h6"
+                mb={3}>
+                Fill up your account information
+              </Typography>
+
+              <form className="form">
+                <Grid item xs={12} mb={3}>
+                  <Input
+                    type="text"
+                    value={name}
+                    onChange={handleChangeName}
+                    disableUnderline
+                    placeholder="Insert your full name"
+                    sx={{
+                      borderRadius: "4px",
+                      backgroundColor: "#fcfcfb",
+                      border: `2px solid ${colors.gray}`,
+                      fontSize: "14px",
+                      fontWeight: 400,
+                      width: "344px",
+                      height: "40px",
+                      padding: "10px 8px",
+                    }}
+                  />
+                </Grid>
+                <Grid item xs={12} mb={3}>
+                  <Input
+                    type="password"
+                    value={password}
+                    onChange={handlechangePassword}
+                    disableUnderline
+                    placeholder="Choose your password"
+                    sx={{
+                      borderRadius: "4px",
+                      backgroundColor: "#fcfcfb",
+                      border: `2px solid ${colors.gray}`,
+                      fontSize: "14px",
+                      fontWeight: 400,
+                      width: "344px",
+                      height: "40px",
+                      padding: "10px 8px",
+                    }}
+                  />
+                </Grid>
+              </form>
+
+              <Grid>
+                <Button
+                  variant="contained"
+                  color="success"
+                  disableElevation
+                  sx={{
+                    boxShadow: "none",
+                    textTransform: "none",
+                    backgroundColor: "#4C84FF",
+                    fontSize: 16,
+                    padding: "14px auto",
+                    border: "1px solid",
+                    lineHeight: 1.5,
+                    borderColor: "#4C84FF",
+                    width: "344px",
+                    marginBottom: "24px",
+                    "&:hover": {
+                      backgroundColor: "#4C84FF",
+                      borderColor: "#4C84FF",
+                      boxShadow: "none",
+                    },
+                  }}
+                  onClick={() => dispatch(validateForm())}>
+                  Next
+                </Button>
+              </Grid>
+            </CardBox>
+          ) : (
+            <CardBox>
+              <Typography className="title reg-title" variant="h4" mb={3}>
+                Sign Up
+              </Typography>
+              <Typography
+                sx={{ margin: "12px !important", textAlign: "center" }}
+                className="sub-title"
+                variant="h6"
+                mb={3}>
+                Create your company space
+              </Typography>
+
+              <form className="form">
+                <Grid item xs={12} mb={3}>
+                  <InputLabel
+                    sx={{
+                      textAlign: "start",
+                      fontSize: "12px",
+                      fontWeight: 400,
+                      fontFamilly: "Rubik",
+                      color: "#ADB0B8",
+                      paddingBottom: "8px !important",
+                      paddingLeft: "8px",
+                    }}>
+                    {" "}
+                    Company Name
+                  </InputLabel>
+                  <Input
+                    type="text"
+                    value={company}
+                    onChange={handlechangeCompany}
+                    disableUnderline
+                    placeholder="Company name"
+                    sx={{
+                      borderRadius: "4px",
+                      backgroundColor: "#fcfcfb",
+                      border: `2px solid ${colors.gray}`,
+                      fontSize: "14px",
+                      fontWeight: 400,
+                      width: "344px",
+                      height: "40px",
+                      padding: "10px 8px",
+                    }}
+                  />
+                </Grid>
+                <Grid item xs={12} mb={3}>
+                  <InputLabel
+                    sx={{
+                      textAlign: "start",
+                      fontSize: "12px",
+                      fontWeight: 400,
+                      fontFamilly: "Rubik",
+                      color: "#ADB0B8",
+                      paddingBottom: "8px !important",
+                      paddingLeft: "8px",
+                    }}>
+                    {" "}
+                    Your space will be
+                  </InputLabel>
+                  <Input
+                    type="text"
+                    value={space}
+                    onChange={handlechangeSpace}
+                    disableUnderline
+                    placeholder="Your space"
+                    sx={{
+                      borderRadius: "4px",
+                      backgroundColor: "#fcfcfb",
+                      border: `2px solid ${
+                        errorMessage ? "#FD5461" : colors.gray
+                      }`,
+                      fontSize: "14px",
+                      fontWeight: 400,
+                      width: "344px",
+                      height: "40px",
+                      padding: "10px 8px",
+                    }}
+                  />
+                  <FormHelperText className="verif-alert">
+                    {errorMessage ? (
+                      <p>
+                        {" "}
+                        <Icon
+                          sx={{
+                            width: "12px",
+                            height: "12px",
+                          }}
+                          style={{ color: "#FD5461" }}
+                          component={ErrorOutlineIcon}></Icon>{" "}
+                        {errorMessage}
+                      </p>
+                    ) : null}
+                  </FormHelperText>
+                </Grid>
+                <FormControl>
+                  <FormHelperText
+                    sx={{
+                      textAlign: "start",
+                      fontSize: "12px",
+                      fontWeight: 400,
+                      fontFamilly: "Rubik",
+                      color: "#ADB0B8",
+                      paddingBottom: "8px !important",
+                      paddingLeft: "8px",
+                      margin: "0px",
+                    }}>
+                    Industry
+                  </FormHelperText>
+                  <Select
+                    value={industry}
+                    IconComponent={KeyboardArrowDownIcon}
+                    displayEmpty
+                    inputProps={{ "aria-label": "Without label" }}
+                    onChange={handlechangeIndustry}
+                    input={<CustomInput />}>
+                    <MenuItem disabled value="">
+                      Industry type
+                    </MenuItem>
+                    <MenuItem value="Computer">Computer</MenuItem>
+                    <MenuItem value="Medical">Medical</MenuItem>
+                    <MenuItem value="Pharmacy">Pharmacy</MenuItem>
+                  </Select>
+                </FormControl>
+                <FormControl>
+                  <FormHelperText
+                    sx={{
+                      textAlign: "start",
+                      fontSize: "12px",
+                      fontWeight: 400,
+                      fontFamilly: "Rubik",
+                      color: "#ADB0B8",
+                      paddingBottom: "8px !important",
+                      paddingLeft: "8px",
+                      margin: "0",
+                    }}>
+                    Number of employees
+                  </FormHelperText>
+                  <Select
+                    value={employees}
+                    IconComponent={KeyboardArrowDownIcon}
+                    displayEmpty
+                    inputProps={{ "aria-label": "Without label" }}
+                    onChange={handlechangeEmployees}
+                    input={<CustomInput />}>
+                    <MenuItem disabled value="">
+                      Select a size
+                    </MenuItem>
+                    <MenuItem value="1">20 </MenuItem>
+                    <MenuItem value="2">30</MenuItem>
+                    <MenuItem value="3">40</MenuItem>
+                  </Select>
+                </FormControl>
+                <FormControl className="check">
+                  <Checkbox defaultChecked />
+                  <FormHelperText
+                    sx={{
+                      color: "##5A6171",
+                      fontSize: "12px",
+                      fontWeight: 400,
+                    }}>
+                    Accept all condition and privacy politic
+                  </FormHelperText>
+                </FormControl>
+              </form>
+
+              <Grid>
                 <Button
                   variant="contained"
                   color="success"
@@ -471,12 +499,30 @@ const Register: React.FC = () => {
                     borderColor: "#29C293",
                     width: "344px",
                     marginBottom: "24px",
+                    "&:hover": {
+                      backgroundColor: "#29C293",
+                      borderColor: "#29C293",
+                      boxShadow: "none",
+                    },
                   }}
-                  onClick={() => registerUser()}>
+                  onClick={() => dispatch(registerUser())}>
                   Register
                 </Button>
-              </Link>
-            </Grid>
+              </Grid>
+            </CardBox>
+          )
+        ) : (
+          <CardBox>
+            <Typography className="title reg-title" variant="h4" mb={3}>
+              Your account is ready!
+            </Typography>
+            <img src={Mail} alt="mail" style={{ marginTop: "50px" }} />
+            <Typography className="down-title" variant="h6" mb={3}>
+              Please verify your Email and continue to Roundrush
+            </Typography>
+            <Link className="log-link" to="/">
+              Go to login page
+            </Link>
           </CardBox>
         )}
       </div>

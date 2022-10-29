@@ -101,6 +101,7 @@ export const registerUserSlice = createSlice({
       state.id = action.payload;
       state.errorMessage = "";
       state.isLoading = false;
+      state.accept = true;
     },
     createUserFail: (state, action: PayloadAction<string>) => {
       state.errorMessage = action.payload;
@@ -128,39 +129,16 @@ export const {
 export const selectCreateUser = (state: RootState) => state.create;
 
 export const registerUser = (): AppThunk => async (dispatch, getState) => {
-  dispatch(validateForm());
 
-  const { email, password, isValid } = selectCreateUser(getState());
+  const { isValid, isExist, formValid } =
+    selectCreateUser(getState());
 
   // If the form is valid, we send a request to the api
-  if (isValid) {
+  if (isValid && !isExist && formValid) {
     dispatch(setLoading());
-
-
-    if (email === "admin@admin.com" || password === "123456") {
-      dispatch(createUserSuccess(uuidv4()));
-    } else {
-      dispatch(
-        createUserFail(
-          "Please make sure you have the correct email and password"
-        )
-      );
-    }
-    /*try {
-      const res: AxiosResponse = await axios.post("quizzes", {
-        email,
-        password,
-      });
-
-      dispatch(createUserSuccess(res.data));
-    } catch (error) {
-      // Catching the error
-      const { response } = error as AxiosError;
-
-      const errorMessage = response?.data || "Something unexpected happend!";
-
-      dispatch(createUserFail(JSON.stringify(errorMessage)));
-    }*/
+    dispatch(createUserSuccess(uuidv4()))
+  } else {
+    dispatch(createUserFail("Somthing wrong!"))
   }
 };
 

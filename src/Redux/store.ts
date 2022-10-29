@@ -2,12 +2,13 @@ import { Action, ThunkAction, configureStore } from "@reduxjs/toolkit";
 
 import auth from "./auth/auth-slice";
 import create from "./auth/register-slice";
-
+import recover from "./auth/recover-slice"
 
 export const store = configureStore({
   reducer: {
     auth,
-    create
+    create,
+    recover
   },
   devTools: true,
 });

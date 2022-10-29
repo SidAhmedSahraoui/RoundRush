@@ -18,12 +18,20 @@ export interface NewUser {
   space: string;
   industry: string;
   employees: string;
-  accept: boolean
+  accept: boolean;
   isLoading: boolean;
   errorMessage: string;
   isValid: boolean;
   isExist: boolean;
   formValid: boolean;
 }
-
+// recover 
+export interface Recover {
+  id: string;
+  email: string;
+  password: string; 
+  alertMessage: string;
+  verified: boolean;
+  done: boolean;
+}
 

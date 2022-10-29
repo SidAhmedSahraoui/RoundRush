@@ -3,9 +3,10 @@ import Helmet from "react-helmet";
 import Pic from "../../img/Frame.png";
 import useStyles from "./style";
 import {Input, Grid, Typography, Button, Alert} from "@mui/material";
-import { changeEmail, changePassword, loginUser } from "../../Redux/auth/auth-slice";
-import { resetState } from "../../Redux/auth/register-slice";
-import { useAppDispatch, useAppSelector } from "../../Redux/hooks";
+import { changeEmail, changePassword, loginUser } from "../../redux/auth/auth-slice";
+import { resetState } from "../../redux/auth/register-slice";
+import { resetState as resState } from "../../redux/auth/recover-slice";
+import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import colors from "../Styles/colors";
 import { Link } from "react-router-dom";
 // app layout
@@ -17,6 +18,8 @@ const Login: React.FC = () => {
   const dispatch = useAppDispatch();
   const {  email, password, errorMessage } =
     useAppSelector((state) => state.auth);
+    const {  alertMessage } =
+    useAppSelector((state) => state.recover );
   const handleChangeEmail = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
 
@@ -41,6 +44,13 @@ const Login: React.FC = () => {
           <Typography sx={{margin: "12px !important", textAlign: "center"}} className="title" variant="h5" mb={3}>
             Login
           </Typography>
+          {alertMessage && (
+              <Grid className="alert-grid" item xs={12} mb={4}>
+                <Alert className="alert-success" variant="filled" severity="success">
+                  {alertMessage}
+                </Alert>
+              </Grid>
+            )}
           {errorMessage && (
           <Grid className="alert-grid" item xs={12} mb={4}>
             <Alert className="alert" variant="filled" severity="warning">
@@ -97,19 +107,25 @@ const Login: React.FC = () => {
               sx={{
                 boxShadow: "none",
                 textTransform: "none",
+                backgroundColor: "#4C84FF",
                 fontSize: 16,
-                padding: "6px 12px",
+                padding: "14px auto",
                 border: "1px solid",
                 lineHeight: 1.5,
-                backgroundColor: "#0063cc",
-                borderColor: "#0063cc",
-                width: "344px"
+                borderColor: "#4C84FF",
+                width: "344px",
+                marginBottom: "24px",
+                "&:hover": {
+                  backgroundColor: "#4C84FF",
+                  borderColor: "#4C84FF",
+                  boxShadow: "none",
+                },
               }}>
               Login
             </Button>
           </Grid>
           <Grid className="links">
-            <Link className="link" to="/forget">
+            <Link onClick={() => resState()} className="link" to="/forgot">
               <span>I forget my password</span>
             </Link>
             <Link onClick={() => resetState()} className="link" to="/register">
