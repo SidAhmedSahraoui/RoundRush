@@ -1,6 +1,7 @@
-import React from "react";
+import React, { Fragment } from "react";
 import useStyles from "./style";
 import Oval from "../../../img/Oval.svg"
+import { v4 as uuidv4 } from "uuid"
 const Members: React.FC = () => {
   const classes = useStyles();
   const users = [
@@ -52,8 +53,8 @@ const Members: React.FC = () => {
           </thead>
           <tbody>
             {users.map((user) => (
-                <div className={!user.active ? "inact" : ""}>
-                    <tr >
+                <Fragment key={uuidv4()} >
+                    <tr className={!user.active ? "inact" : ""}>
                         <td className="name">
                             <img width="20px" height="20px" src={Oval} alt="" />
                             {user.name}
@@ -72,7 +73,7 @@ const Members: React.FC = () => {
                         </td>
                     </tr>
                     <span className="sb"></span>
-                </div>
+                </Fragment>
             ))}
           </tbody>
         </table>
