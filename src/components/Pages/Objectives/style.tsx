@@ -1,6 +1,158 @@
 import { createUseStyles } from "react-jss";
 
 const useStyles = createUseStyles({
+  second: {
+    width: "500px",
+    position: "absolute",
+    overflowY: "scroll",
+    right: "0px",
+    top: "0px",
+    background: "#ffffff",
+    border: "2px solid #E8F0FE",
+    height: "100%",
+    zIndex: 8,
+    transition:" 0.4s all ease",
+
+    "&::-webkit-scrollbar": {
+      width: "5px",
+    },
+
+    "::-webkit-scrollbar-track": {
+      background: "#fff",
+    },
+
+    "::-webkit-scrollbar-thumb": {
+      background: "#c2c2c2",
+      borderRadius: "10px",
+    },
+
+    "&::-webkit-scrollbar-thumb:hover": {
+      background: "#919090",
+    },
+    "& nav": {
+      height: "50px",
+      borderBottom: "2px solid #E8F0FE",
+      display: "flex",
+      justifyContent: "flex-end",
+      alignItems: "center",
+      "& img": {
+        margin: "auto 12px",
+        cursor: "pointer"
+      },
+    },
+    "& .core": {
+      "& h1": {
+        fontWeight: 600,
+        fontSize: "24px",
+        fontFamily: "Rubik",
+        margin: "24px",
+        textAlign: "left",
+        color: "rgb(21, 27, 38)",
+      },
+      "& h5": {
+        fontWeight: 400,
+        fontSize: "12px",
+        marginLeft: "32px",
+        fontFamily: "Rubik",
+        textAlign: "left",
+        color: " #ADB0B8",
+      },
+      "& p": {
+        width: "390px",
+        color: "rgba(21, 27, 38, 0.5)",
+        fontWeight: 400,
+        fontSize: "12px",
+        textAlign: "left",
+        marginLeft: "32px",
+        fontFamily: "Rubik",
+        marginTop: "14px",
+      },
+      "& h6": {
+        color: "#ADB0B8",
+        fontWeight: 400,
+        fontSize: "12px",
+        textAlign: "left",
+        marginLeft: "24px",
+        fontFamily: "Rubik",
+        marginTop: "24px",
+      },
+      "& .prio": {
+        width: "120px",
+        alignItems: "center",
+        display: "flex",
+        justifyContent: "space-evenly",
+        marginLeft: "32px",
+        marginTop: "14px",
+        "& h3": {
+          color: "#31394E",
+          fontWeight: 400,
+          fontSize: "14px",
+          fontFamily: "Rubik",
+        },
+        "& img": {},
+      },
+      "& .date": {
+        color: "#31394E",
+        fontWeight: 400,
+        fontSize: "14px",
+        fontFamily: "Rubik",
+        textAlign: "left",
+        margin: "14px 0px 30px 32px",
+      },
+      "& .title": {
+        width: "90%",
+        margin: "33px 0px 0px 33px",
+        display: "flex",
+        justifyContent: "space-between",
+        "& h1": {
+          color: "#4C84FF",
+          fontWeight: 600,
+          fontSize: "12px",
+          fontFamily: "Rubik",
+        },
+      },
+      "& .assi": {
+        margin: "14px 32px",
+        display: "flex",
+        "& .rec": {
+          background: "rgba(0, 121, 255, 0.2963)",
+          borderRadius: "7.5px",
+          marginRight: "8px",
+          width: "160px",
+          height: "36px",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-evenly",
+          cursor: "pointer",
+          "& h3": {
+            color: "#0079FF",
+            fontWeight: 400,
+            fontSize: "12.5px",
+            fontFamily: "Rubik",
+          },
+        },
+      },
+      "& .rec": {
+        width: "100%",
+        height: "50px",
+        display: "flex",
+        justifyContent: "space-between",
+        alignItems: "center",
+        "& div": {
+          display: "flex",
+          alignItems: "center",
+          width: "20%",
+          justifyContent: "space-evenly",
+        },
+        "& h1": {
+          color: "#000000",
+          fontSize: "14px",
+          fontWeight: 400,
+          fontFamily: "Rubik",
+        },
+      },
+    },
+  },
   main: {
     width: "80%",
     margin: "30px auto",
@@ -205,11 +357,11 @@ const useStyles = createUseStyles({
             justifyContent: "flex-end",
             "& .img1": {
               position: "relative",
-              left: "12px",
+              left: "8px",
             },
             "& .img2": {
               position: "relative",
-              right: "12px",
+              right: "8px",
             },
           },
         },
