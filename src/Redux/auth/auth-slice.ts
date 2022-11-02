@@ -91,7 +91,7 @@ export const loginUser = (): AppThunk => async (dispatch, getState) => {
       dispatch(createUserFail("Please make sure you have the correct email and password"))
     }
     /*try {
-      const res: AxiosResponse = await axios.post("quizzes", {
+      const res: AxiosResponse = await axios.post("user", {
         email,
         password,
       });

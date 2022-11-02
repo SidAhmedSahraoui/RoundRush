@@ -398,7 +398,7 @@ const Register: React.FC = () => {
                   />
                   <FormHelperText className="verif-alert">
                     {errorMessage ? (
-                      <p>
+                      <>
                         {" "}
                         <Icon
                           sx={{
@@ -408,7 +408,7 @@ const Register: React.FC = () => {
                           style={{ color: "#FD5461" }}
                           component={ErrorOutlineIcon}></Icon>{" "}
                         {errorMessage}
-                      </p>
+                      </>
                     ) : null}
                   </FormHelperText>
                 </Grid>
