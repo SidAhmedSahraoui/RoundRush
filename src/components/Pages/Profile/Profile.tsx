@@ -6,6 +6,7 @@ import Settings from "../../../img/set.svg";
 import { Link, Route, Routes } from "react-router-dom";
 import Info from "../Info/Info";
 import Members from "../Members/Members";
+import { users } from "../../../mocks";
 
 const Profile: React.FC = () => {
   const classes = useStyles();
@@ -35,7 +36,7 @@ const Profile: React.FC = () => {
           </nav>
           <span></span>
           <Routes>
-            <Route element={<Members />} path="/members" />
+            <Route element={<Members users={users} />} path="/members" />
             <Route element={<Info />} path="/" />
           </Routes>
         </section>

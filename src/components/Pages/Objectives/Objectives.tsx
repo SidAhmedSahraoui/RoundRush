@@ -23,63 +23,16 @@ import Copy from "../../../img/copy.svg";
 import { v4 as uuid } from "uuid";
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
+import { oProps } from "../../../types/types";
 
-const Objectives: React.FC = () => {
+const Objectives: React.FC<oProps> = ({objs}) => {
   const classes = useStyles();
   const [dis, setDis] = useState(false);
   const clickHandler = (event: React.MouseEvent<HTMLImageElement>) => {
     event.preventDefault();
     setDis((dis) => !dis);
     console.log(dis)
-  };
-  const objs = [
-    {
-      name: "Notifications Center",
-      priority: 4,
-      status: false,
-      date: "15/01/2020",
-      check: "5/10",
-    },
-    {
-      name: "App Mobile",
-      priority: 3,
-      status: false,
-      date: "15/01/2020",
-      check: "5/10",
-    },
-    {
-      name: "DevOps",
-      priority: 2,
-      status: false,
-      date: "15/01/2020",
-      check: "5/10",
-    },
-    {
-      name: "Kubernetes",
-      priority: 1,
-      status: false,
-      date: "15/01/2020",
-      check: "5/10",
-    },
-    {
-      name: "Docker",
-      priority: 4,
-      status: false,
-      date: "15/01/2020",
-      check: "5/10",
-    },
-  ];
-  /*const style = {
-    position: 'absolute' as 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    width: 400,
-    bgcolor: 'background.paper',
-    border: '2px solid #000',
-    boxShadow: 24,
-    p: 4,
-  };*/
+  };    
   return (
     <>
       <main className={classes.main}>

@@ -2,40 +2,11 @@ import React, { Fragment } from "react";
 import useStyles from "./style";
 import Oval from "../../../img/Oval.svg"
 import { v4 as uuidv4 } from "uuid"
-const Members: React.FC = () => {
+import { uProps } from "../../../types/types";
+
+const Members: React.FC<uProps> = ({users}) => {
   const classes = useStyles();
-  const users = [
-    {
-      name: "Mario Panariello",
-      owner: true,
-      email: "mario.panariello@lastingdynamics.com",
-      active: true,
-    },
-    {
-      name: "Brandon Watson",
-      owner: false,
-      email: "mario.panariello@lastingdynamics.com",
-      active: true,
-    },
-    {
-      name: "Norma Copper",
-      owner: false,
-      email: "mario.panariello@lastingdynamics.com",
-      active: false,
-    },
-    {
-      name: "Mario Panariello",
-      owner: false,
-      email: "mario.panariello@lastingdynamics.com",
-      active: false,
-    },
-    {
-        name: "Mario Panariello",
-        owner: true,
-        email: "mario.panariello@lastingdynamics.com",
-        active: true,
-      }
-  ];
+
 
   return (
     <>

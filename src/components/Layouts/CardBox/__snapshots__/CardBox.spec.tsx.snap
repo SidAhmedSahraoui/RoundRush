@@ -1,0 +1,29 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CardBox Render CardBox component 1`] = `
+<div>
+  <div
+    class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiCard-root makeStyles-root-1 css-bhp9pd-MuiPaper-root-MuiCard-root"
+  >
+    <div
+      class="MuiCardContent-root css-1i9wt8r-MuiCardContent-root"
+    >
+      Test
+    </div>
+  </div>
+</div>
+`;
+
+exports[`src/components/cards/card-box/index.tsx Render CardBox component 1`] = `
+<div>
+  <div
+    class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiCard-root makeStyles-root-1 css-bhp9pd-MuiPaper-root-MuiCard-root"
+  >
+    <div
+      class="MuiCardContent-root css-1i9wt8r-MuiCardContent-root"
+    >
+      Test
+    </div>
+  </div>
+</div>
+`;
