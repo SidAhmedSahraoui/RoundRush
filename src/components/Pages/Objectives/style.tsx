@@ -12,6 +12,9 @@ const useStyles = createUseStyles({
     height: "100%",
     zIndex: 8,
     transition:" 0.4s all ease",
+    "&:focus": {
+      border: "2px solid #E8F0FE",
+    },
 
     "&::-webkit-scrollbar": {
       width: "5px",
@@ -107,6 +110,7 @@ const useStyles = createUseStyles({
         "& h1": {
           color: "#4C84FF",
           fontWeight: 600,
+          margin: "0px",
           fontSize: "12px",
           fontFamily: "Rubik",
         },
@@ -138,6 +142,10 @@ const useStyles = createUseStyles({
         display: "flex",
         justifyContent: "space-between",
         alignItems: "center",
+        "&:hover": {
+          background: "#E8F0FE",
+          cursor: "pointer"
+        },
         "& div": {
           display: "flex",
           alignItems: "center",

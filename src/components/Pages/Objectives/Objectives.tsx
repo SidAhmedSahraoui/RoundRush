@@ -21,9 +21,12 @@ import Delete from "../../../img/delete.svg";
 import High from "../../../img/high.svg";
 import Copy from "../../../img/copy.svg";
 import { v4 as uuid } from "uuid";
+import Box from '@mui/material/Box';
+import Modal from '@mui/material/Modal';
+
 const Objectives: React.FC = () => {
   const classes = useStyles();
-  const [dis, setDis] = useState(true);
+  const [dis, setDis] = useState(false);
   const clickHandler = (event: React.MouseEvent<HTMLImageElement>) => {
     event.preventDefault();
     setDis((dis) => !dis);
@@ -66,6 +69,17 @@ const Objectives: React.FC = () => {
       check: "5/10",
     },
   ];
+  /*const style = {
+    position: 'absolute' as 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: 400,
+    bgcolor: 'background.paper',
+    border: '2px solid #000',
+    boxShadow: 24,
+    p: 4,
+  };*/
   return (
     <>
       <main className={classes.main}>
@@ -195,7 +209,13 @@ const Objectives: React.FC = () => {
           ))}
         </main>
       </main>
-      <div style={dis ? {display: "inline"} : {display: "none"}} className={classes.second}>
+      <Modal
+        open={dis}
+        onClose={clickHandler}
+        sx={{border: "none"}}
+        
+      >
+        <Box className={classes.second} >
         <nav>
           <img onClick={clickHandler} src={Delete} alt="" />
           <img onClick={clickHandler} src={Close} alt="" />
@@ -247,26 +267,27 @@ const Objectives: React.FC = () => {
           <div className="rec">
             <h1>Notifications Service</h1>
             <div>
-            <MoreHorizIcon />
+            <MoreHorizIcon sx={{color: "#ADB0B8"}}  />
             <Checkbox inputProps={{ 'aria-label': 'Checkbox demo' }}  defaultChecked />
             </div>
           </div>
           <div className="rec">
             <h1>Notifications Service</h1>
             <div>
-            <MoreHorizIcon />
+            <MoreHorizIcon sx={{color: "#ADB0B8"}}  />
             <Checkbox inputProps={{ 'aria-label': 'Checkbox demo' }}  defaultChecked />
             </div>
           </div>
           <div className="rec">
             <h1>API server</h1>
             <div>
-            <MoreHorizIcon />
+            <MoreHorizIcon sx={{color: "#ADB0B8"}} />
             <Checkbox inputProps={{ 'aria-label': 'Checkbox demo' }}  defaultChecked />
             </div>
           </div>
         </div>
-      </div>
+        </Box>
+      </Modal>
     </>
   );
 };
