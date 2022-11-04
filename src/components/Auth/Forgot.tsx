@@ -97,12 +97,13 @@ const Forgot: React.FC = () => {
                       borderColor: "#4C84FF",
                       boxShadow: "none",
                     },
-                  }}>
+                  }}
+                  name="recover">
                   Recover your password
                 </Button>
               </Grid>
 
-              <Link onClick={() => resetState()} className="link" to="/">
+              <Link  onClick={() => resetState()} className="link" to="/">
                 <span>Back to login</span>
               </Link>
             </form>

@@ -11,15 +11,23 @@ const useStyles = createUseStyles({
       textAlign: "left",
       color: "#31394E",
     },
-    "& table": {
+    "& .btn": {
+      width: "100%",
+      display: "flex",
+      justifyContent: "flex-end",
+      alignItems: "center",
+      marginTop:"24px"
+
+    },
+    "& .table": {
       width: "700px",
       marginTop: "40px",
-      "& thead": {
-        "& tr": {
+      "& .head": {
+        "& .line": {
           display: "flex",
           justifyContent: "flex-start",
           alignItems: "center",
-          "& th": {
+          "& .col": {
             width: "20%",
             padding: "12px 55px 40px 10px",
             fontFamily: "Rubik",
@@ -30,15 +38,16 @@ const useStyles = createUseStyles({
           },
         },
       },
-      "& tbody": {
+      "& main": {
         "& .sb": {
-          width: "92%",
+          width: "100%",
           height: "2px",
+          margin: "0px",
         },
         "& .inact": {
           backgroundColor: "#EAEBED",
         },
-        "& tr": {
+        "& div": {
           padding: "12px",
           display: "flex",
           justifyContent: "space-between",

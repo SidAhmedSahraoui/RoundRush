@@ -189,6 +189,7 @@ const Register: React.FC = () => {
                       boxShadow: "none",
                     },
                   }}
+                  name="next"
                   onClick={() => dispatch(validateEmail())}>
                   Next
                 </Button>
@@ -487,6 +488,7 @@ const Register: React.FC = () => {
                 <Button
                   variant="contained"
                   color="success"
+                  name="register"
                   disableElevation
                   sx={{
                     boxShadow: "none",

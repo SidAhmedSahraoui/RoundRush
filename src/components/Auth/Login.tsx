@@ -104,6 +104,7 @@ const Login: React.FC = () => {
               variant="contained"
               disableElevation
               onClick={() => dispatch(loginUser())}
+              name="login"
               sx={{
                 boxShadow: "none",
                 textTransform: "none",

@@ -31,7 +31,6 @@ const Objectives: React.FC<oProps> = ({objs}) => {
   const clickHandler = (event: React.MouseEvent<HTMLImageElement>) => {
     event.preventDefault();
     setDis((dis) => !dis);
-    console.log(dis)
   };    
   return (
     <>
